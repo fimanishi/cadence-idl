@@ -744,6 +744,7 @@ struct ActivityTaskStartedEventAttributes {
   40: optional i32 attempt
   50: optional string lastFailureReason
   60: optional binary lastFailureDetails
+  70: optional FailureOptions lastFailureOptions
 }
 
 struct ActivityTaskCompletedEventAttributes {
@@ -756,6 +757,7 @@ struct ActivityTaskCompletedEventAttributes {
 struct ActivityTaskFailedEventAttributes {
   10: optional string reason
   20: optional binary details
+  25: optional FailureOptions failureOptions
   30: optional i64 (js.type = "Long") scheduledEventId
   40: optional i64 (js.type = "Long") startedEventId
   50: optional string identity
@@ -770,6 +772,7 @@ struct ActivityTaskTimedOutEventAttributes {
   // Client can also provide the info for making next decision
   40: optional string lastFailureReason
   50: optional binary lastFailureDetails
+  60: optional FailureOptions lastFailureOptions
 }
 
 struct ActivityTaskCancelRequestedEventAttributes {
@@ -1455,6 +1458,8 @@ struct RespondActivityTaskFailedRequest {
   20: optional string reason
   30: optional binary details
   40: optional string identity
+  45: optional FailureOptions failureOptions
+  50: optional binary heartbeatDetails
 }
 
 struct RespondActivityTaskCanceledRequest {
@@ -1479,7 +1484,9 @@ struct RespondActivityTaskFailedByIDRequest {
   40: optional string activityID
   50: optional string reason
   60: optional binary details
+  65: optional FailureOptions failureOptions
   70: optional string identity
+  80: optional binary heartbeatDetails
 }
 
 struct RespondActivityTaskCanceledByIDRequest {
@@ -1722,6 +1729,7 @@ struct PendingActivityInfo {
   110: optional string lastFailureReason
   120: optional string lastWorkerIdentity
   130: optional binary lastFailureDetails
+  135: optional FailureOptions lastFailureOptions
   140: optional string startedWorkerIdentity
   150: optional i64 (js.type = "Long") scheduleID
 }
@@ -2493,3 +2501,14 @@ struct UpdateScheduleRequest {
 }
 
 struct UpdateScheduleResponse {}
+
+enum FailureCategory {
+  Poll,
+  Standard,
+  Fatal,
+}
+
+struct FailureOptions {
+  10: optional FailureCategory failureCategory
+  20: optional i32 (js.type = "Long") nextRetryIntervalSeconds
+}

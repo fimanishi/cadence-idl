@@ -326,6 +326,7 @@ struct SyncActivityRequest {
   120: optional string lastFailureReason
   130: optional string lastWorkerIdentity
   140: optional binary lastFailureDetails
+  145: optional shared.FailureOptions lastFailureOptions
   150: optional shared.VersionHistory versionHistory
 }
 

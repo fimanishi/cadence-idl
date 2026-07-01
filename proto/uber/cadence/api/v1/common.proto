@@ -49,7 +49,31 @@ message Payload {
 message Failure {
   string reason = 1;
   bytes details = 2;
+  FailureOptions options = 3;
 }
+
+enum FailureCategory {
+  // Unknown or unspecified failure category. Treated like FAILURE_CATEGORY_STANDARD.
+  FAILURE_CATEGORY_INVALID = 0;
+  // Indicates the failure is expected due to a polling-style activity. Clients should avoid logging or emitting metrics
+  // for failures of this category.
+  FAILURE_CATEGORY_POLL = 1;
+  // Default behavior for a failure. Whether the failure is retried depends on the RetryPolicy.
+  FAILURE_CATEGORY_STANDARD = 2;
+  // Indicates that the failure should not be retried, regardless of the RetryPolicy.
+  FAILURE_CATEGORY_FATAL = 3;
+}
+
+
+message FailureOptions {
+  FailureCategory failure_category = 1;
+  // If set, overrides the next retry interval calculated by the RetryPolicy for this failure. This allows activity
+  // implementations to control the retry interval on a per failure basis.
+  // This value does not influence whether or not the activity will be retried. That is determined by the RetryPolicy
+  // and the failure's category.
+  google.protobuf.Duration next_retry_interval = 2;
+}
+
 
 message Memo {
   map<string, Payload> fields = 1;

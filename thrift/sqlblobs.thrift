@@ -186,6 +186,7 @@ struct ActivityInfo {
   66: optional string retryLastFailureReason
   68: optional string retryLastWorkerIdentity
   70: optional binary retryLastFailureDetails
+  72: optional shared.FailureOptions retryLastFailureOptions
 }
 
 struct ChildExecutionInfo {

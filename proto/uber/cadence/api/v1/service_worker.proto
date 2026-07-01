@@ -252,6 +252,7 @@ message RespondActivityTaskFailedRequest {
   bytes task_token = 1;
   Failure failure = 2;
   string identity = 3;
+  Payload heartbeat_details = 4;
 }
 
 message RespondActivityTaskFailedResponse {
@@ -263,6 +264,7 @@ message RespondActivityTaskFailedByIDRequest {
   string activity_id = 3;
   Failure failure = 4;
   string identity = 5;
+  Payload heartbeat_details = 6;
 }
 
 message RespondActivityTaskFailedByIDResponse {
