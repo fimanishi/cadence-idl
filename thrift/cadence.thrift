@@ -854,4 +854,33 @@ service WorkflowService {
       3: shared.ServiceBusyError serviceBusyError,
       4: shared.AccessDeniedError accessDeniedError,
     )
+
+  /**
+  * ExportWorkflowExecution exports a workflow execution's complete history
+  * as serialized event batches suitable for import into another domain or cluster.
+  **/
+  shared.ExportWorkflowExecutionResponse ExportWorkflowExecution(1: shared.ExportWorkflowExecutionRequest request)
+    throws (
+      1: shared.BadRequestError badRequestError,
+      2: shared.InternalServiceError internalServiceError,
+      3: shared.EntityNotExistsError entityNotExistError,
+      4: shared.ServiceBusyError serviceBusyError,
+      5: shared.DomainNotActiveError domainNotActiveError,
+      6: shared.AccessDeniedError accessDeniedError,
+    )
+
+  /**
+  * ImportWorkflowExecution imports a workflow execution from exported history data.
+  * The workflow is materialized from the history events and can continue execution or be reset.
+  **/
+  shared.ImportWorkflowExecutionResponse ImportWorkflowExecution(1: shared.ImportWorkflowExecutionRequest request)
+    throws (
+      1: shared.BadRequestError badRequestError,
+      2: shared.InternalServiceError internalServiceError,
+      3: shared.ServiceBusyError serviceBusyError,
+      4: shared.DomainNotActiveError domainNotActiveError,
+      5: shared.EntityNotExistsError entityNotExistError,
+      6: shared.WorkflowExecutionAlreadyStartedError workflowExecutionAlreadyStartedError,
+      7: shared.AccessDeniedError accessDeniedError,
+    )
 }

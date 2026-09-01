@@ -305,6 +305,11 @@ struct ReplicateEventsV2Request {
   60: optional shared.DataBlob newRunEvents
 }
 
+struct ImportWorkflowExecutionRequest {
+  10: optional string domainUUID
+  20: optional shared.ImportWorkflowExecutionRequest request
+}
+
 struct SyncShardStatusRequest {
   10: optional string sourceCluster
   20: optional i64 (js.type = "Long") shardId
@@ -1100,5 +1105,19 @@ service HistoryService {
       2: shared.InternalServiceError internalServiceError,
       3: shared.ServiceBusyError serviceBusyError,
       4: ShardOwnershipLostError shardOwnershipLostError,
+    )
+
+  /**
+  * ImportWorkflowExecution imports a workflow execution from exported history data
+  * by replaying the events to reconstruct mutable state.
+  **/
+  shared.ImportWorkflowExecutionResponse ImportWorkflowExecution(1: ImportWorkflowExecutionRequest importRequest)
+    throws (
+      1: shared.BadRequestError badRequestError,
+      2: shared.InternalServiceError internalServiceError,
+      3: shared.EntityNotExistsError entityNotExistError,
+      4: ShardOwnershipLostError shardOwnershipLostError,
+      5: shared.ServiceBusyError serviceBusyError,
+      6: shared.WorkflowExecutionAlreadyStartedError workflowExecutionAlreadyStartedError,
     )
 }

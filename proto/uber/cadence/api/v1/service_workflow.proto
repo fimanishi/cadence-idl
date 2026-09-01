@@ -102,6 +102,14 @@ service WorkflowAPI {
 
   // Diagnoses a workflow execution and provides a report as response
   rpc DiagnoseWorkflowExecution(DiagnoseWorkflowExecutionRequest) returns (DiagnoseWorkflowExecutionResponse);
+
+  // ExportWorkflowExecution exports a workflow execution's complete history
+  // as serialized event batches suitable for import into another domain or cluster.
+  rpc ExportWorkflowExecution(ExportWorkflowExecutionRequest) returns (ExportWorkflowExecutionResponse);
+
+  // ImportWorkflowExecution imports a workflow execution from exported history data.
+  // The workflow is materialized from the history events and can continue execution or be reset.
+  rpc ImportWorkflowExecution(ImportWorkflowExecutionRequest) returns (ImportWorkflowExecutionResponse);
 }
 
 message RestartWorkflowExecutionRequest {
@@ -328,4 +336,27 @@ message RefreshWorkflowTasksRequest {
 }
 
 message RefreshWorkflowTasksResponse {
+}
+
+message ExportWorkflowExecutionRequest {
+  string domain = 1;
+  WorkflowExecution workflow_execution = 2;
+}
+
+message ExportWorkflowExecutionResponse {
+  repeated DataBlob history_batches = 1;
+  VersionHistory version_history = 2;
+  string domain_id = 3;
+}
+
+message ImportWorkflowExecutionRequest {
+  string domain = 1;
+  WorkflowExecution workflow_execution = 2;
+  repeated DataBlob history_batches = 3;
+  repeated VersionHistoryItem version_history_items = 4;
+  string source_domain_id = 5;
+}
+
+message ImportWorkflowExecutionResponse {
+  WorkflowExecution workflow_execution = 1;
 }

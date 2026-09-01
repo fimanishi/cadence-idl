@@ -2515,3 +2515,26 @@ struct FailureOptions {
   10: optional FailureCategory failureCategory
   20: optional i32 (js.type = "Long") nextRetryIntervalSeconds
 }
+
+struct ExportWorkflowExecutionRequest {
+  10: optional string domain
+  20: optional WorkflowExecution execution
+}
+
+struct ExportWorkflowExecutionResponse {
+  10: optional list<DataBlob> historyBatches
+  20: optional VersionHistory versionHistory
+  30: optional string domainID
+}
+
+struct ImportWorkflowExecutionRequest {
+  10: optional string domain
+  20: optional WorkflowExecution execution
+  30: optional list<DataBlob> historyBatches
+  40: optional list<VersionHistoryItem> versionHistoryItems
+  50: optional string sourceDomainID
+}
+
+struct ImportWorkflowExecutionResponse {
+  10: optional WorkflowExecution execution
+}
