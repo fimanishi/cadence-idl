@@ -344,16 +344,17 @@ message ExportWorkflowExecutionRequest {
 }
 
 message ExportWorkflowExecutionResponse {
-  repeated DataBlob history_batches = 1;
-  VersionHistory version_history = 2;
-  string domain_id = 3;
+  WorkflowExecution execution = 1;
+  repeated DataBlob history_batches = 2;
+  VersionHistory version_history = 3;
+  string source_domain_id = 4;
 }
 
 message ImportWorkflowExecutionRequest {
   string domain = 1;
   WorkflowExecution workflow_execution = 2;
   repeated DataBlob history_batches = 3;
-  repeated VersionHistoryItem version_history_items = 4;
+  VersionHistory version_history = 4;
   string source_domain_id = 5;
 }
 

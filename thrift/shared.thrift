@@ -2522,16 +2522,17 @@ struct ExportWorkflowExecutionRequest {
 }
 
 struct ExportWorkflowExecutionResponse {
-  10: optional list<DataBlob> historyBatches
-  20: optional VersionHistory versionHistory
-  30: optional string domainID
+  10: optional WorkflowExecution execution
+  20: optional list<DataBlob> historyBatches
+  30: optional VersionHistory versionHistory
+  40: optional string sourceDomainID
 }
 
 struct ImportWorkflowExecutionRequest {
   10: optional string domain
   20: optional WorkflowExecution execution
   30: optional list<DataBlob> historyBatches
-  40: optional list<VersionHistoryItem> versionHistoryItems
+  40: optional VersionHistory versionHistory
   50: optional string sourceDomainID
 }
 
