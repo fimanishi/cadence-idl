@@ -110,6 +110,10 @@ service WorkflowAPI {
   // ImportWorkflowExecution imports a workflow execution from exported history data.
   // The workflow is materialized from the history events and can continue execution or be reset.
   rpc ImportWorkflowExecution(ImportWorkflowExecutionRequest) returns (ImportWorkflowExecutionResponse);
+
+  // CompleteImportWorkflowExecution finalizes a paginated workflow import.
+  // It generates transfer, timer, and replication tasks so the workflow becomes active.
+  rpc CompleteImportWorkflowExecution(CompleteImportWorkflowExecutionRequest) returns (CompleteImportWorkflowExecutionResponse);
 }
 
 message RestartWorkflowExecutionRequest {
@@ -341,6 +345,8 @@ message RefreshWorkflowTasksResponse {
 message ExportWorkflowExecutionRequest {
   string domain = 1;
   WorkflowExecution workflow_execution = 2;
+  int32 page_size = 3;
+  bytes next_page_token = 4;
 }
 
 message ExportWorkflowExecutionResponse {
@@ -348,6 +354,7 @@ message ExportWorkflowExecutionResponse {
   repeated DataBlob history_batches = 2;
   VersionHistory version_history = 3;
   string source_domain_id = 4;
+  bytes next_page_token = 5;
 }
 
 message ImportWorkflowExecutionRequest {
@@ -356,8 +363,20 @@ message ImportWorkflowExecutionRequest {
   repeated DataBlob history_batches = 3;
   VersionHistory version_history = 4;
   string source_domain_id = 5;
+  bytes page_token = 6;
 }
 
 message ImportWorkflowExecutionResponse {
+  WorkflowExecution workflow_execution = 1;
+  bytes page_token = 2;
+}
+
+message CompleteImportWorkflowExecutionRequest {
+  string domain = 1;
+  WorkflowExecution workflow_execution = 2;
+  bytes page_token = 3;
+}
+
+message CompleteImportWorkflowExecutionResponse {
   WorkflowExecution workflow_execution = 1;
 }

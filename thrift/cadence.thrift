@@ -883,4 +883,18 @@ service WorkflowService {
       6: shared.WorkflowExecutionAlreadyStartedError workflowExecutionAlreadyStartedError,
       7: shared.AccessDeniedError accessDeniedError,
     )
+
+  /**
+  * CompleteImportWorkflowExecution finalizes a paginated workflow import.
+  * It generates transfer, timer, and replication tasks so the workflow becomes active.
+  **/
+  shared.CompleteImportWorkflowExecutionResponse CompleteImportWorkflowExecution(1: shared.CompleteImportWorkflowExecutionRequest request)
+    throws (
+      1: shared.BadRequestError badRequestError,
+      2: shared.InternalServiceError internalServiceError,
+      3: shared.ServiceBusyError serviceBusyError,
+      4: shared.DomainNotActiveError domainNotActiveError,
+      5: shared.EntityNotExistsError entityNotExistError,
+      6: shared.AccessDeniedError accessDeniedError,
+  )
 }

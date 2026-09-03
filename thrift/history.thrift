@@ -310,6 +310,15 @@ struct ImportWorkflowExecutionRequest {
   20: optional shared.ImportWorkflowExecutionRequest request
 }
 
+struct ImportWorkflowExecutionResponse {
+  10: optional shared.ImportWorkflowExecutionResponse response
+}
+
+struct CompleteImportWorkflowExecutionRequest {
+  10: optional string domainUUID
+  20: optional shared.CompleteImportWorkflowExecutionRequest request
+}
+
 struct SyncShardStatusRequest {
   10: optional string sourceCluster
   20: optional i64 (js.type = "Long") shardId
@@ -1120,4 +1129,17 @@ service HistoryService {
       5: shared.ServiceBusyError serviceBusyError,
       6: shared.WorkflowExecutionAlreadyStartedError workflowExecutionAlreadyStartedError,
     )
+
+  /**
+  * CompleteImportWorkflowExecution finalizes a paginated workflow import.
+  * It generates transfer, timer, and replication tasks so the workflow becomes active.
+  **/
+  shared.CompleteImportWorkflowExecutionResponse CompleteImportWorkflowExecution(1: CompleteImportWorkflowExecutionRequest completeImportRequest)
+    throws (
+      1: shared.BadRequestError badRequestError,
+      2: shared.InternalServiceError internalServiceError,
+      3: shared.EntityNotExistsError entityNotExistError,
+      4: ShardOwnershipLostError shardOwnershipLostError,
+      5: shared.ServiceBusyError serviceBusyError,
+  )
 }
