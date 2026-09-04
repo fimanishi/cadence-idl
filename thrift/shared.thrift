@@ -2528,7 +2528,8 @@ struct ExportWorkflowExecutionResponse {
   20: optional list<DataBlob> historyBatches
   30: optional VersionHistory versionHistory
   40: optional string sourceDomainID
-  50: optional binary nextPageToken
+  50: optional string sourceDomainName
+  60: optional binary nextPageToken
 }
 
 struct ImportWorkflowExecutionRequest {
@@ -2537,7 +2538,8 @@ struct ImportWorkflowExecutionRequest {
   30: optional list<DataBlob> historyBatches
   40: optional VersionHistory versionHistory
   50: optional string sourceDomainID
-  60: optional binary pageToken
+  60: optional string sourceDomainName
+  70: optional binary pageToken
 }
 
 struct ImportWorkflowExecutionResponse {

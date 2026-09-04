@@ -354,7 +354,8 @@ message ExportWorkflowExecutionResponse {
   repeated DataBlob history_batches = 2;
   VersionHistory version_history = 3;
   string source_domain_id = 4;
-  bytes next_page_token = 5;
+  string source_domain_name = 5;
+  bytes next_page_token = 6;
 }
 
 message ImportWorkflowExecutionRequest {
@@ -363,7 +364,8 @@ message ImportWorkflowExecutionRequest {
   repeated DataBlob history_batches = 3;
   VersionHistory version_history = 4;
   string source_domain_id = 5;
-  bytes page_token = 6;
+  string source_domain_name = 6;
+  bytes page_token = 7;
 }
 
 message ImportWorkflowExecutionResponse {
