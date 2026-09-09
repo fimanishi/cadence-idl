@@ -366,6 +366,7 @@ message ImportWorkflowExecutionRequest {
   string source_domain_id = 5;
   string source_domain_name = 6;
   bytes page_token = 7;
+  bool force_restart = 8;
 }
 
 message ImportWorkflowExecutionResponse {

@@ -2540,6 +2540,7 @@ struct ImportWorkflowExecutionRequest {
   50: optional string sourceDomainID
   60: optional string sourceDomainName
   70: optional binary pageToken
+  80: optional bool forceRestart
 }
 
 struct ImportWorkflowExecutionResponse {
