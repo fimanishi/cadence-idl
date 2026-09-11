@@ -347,15 +347,14 @@ message ExportWorkflowExecutionRequest {
   WorkflowExecution workflow_execution = 2;
   int32 page_size = 3;
   bytes next_page_token = 4;
+  int64 last_event_id = 5;
 }
 
 message ExportWorkflowExecutionResponse {
   WorkflowExecution execution = 1;
   repeated DataBlob history_batches = 2;
   VersionHistory version_history = 3;
-  string source_domain_id = 4;
-  string source_domain_name = 5;
-  bytes next_page_token = 6;
+  bytes next_page_token = 4;
 }
 
 message ImportWorkflowExecutionRequest {
@@ -363,10 +362,10 @@ message ImportWorkflowExecutionRequest {
   WorkflowExecution workflow_execution = 2;
   repeated DataBlob history_batches = 3;
   VersionHistory version_history = 4;
-  string source_domain_id = 5;
-  string source_domain_name = 6;
-  bytes page_token = 7;
-  bool force_restart = 8;
+  bytes page_token = 5;
+  bool force_restart = 6;
+  WorkflowIdReusePolicy workflow_id_reuse_policy = 7;
+  string task_list = 8;
 }
 
 message ImportWorkflowExecutionResponse {
