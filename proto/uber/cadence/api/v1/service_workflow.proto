@@ -382,3 +382,11 @@ message CompleteImportWorkflowExecutionRequest {
 message CompleteImportWorkflowExecutionResponse {
   WorkflowExecution workflow_execution = 1;
 }
+
+message WorkflowExportData {
+  int32 version = 1;
+  WorkflowExecution execution = 2;
+  repeated DataBlob history_batches = 3;
+  VersionHistory version_history = 4;
+  bytes checksum = 5;
+}

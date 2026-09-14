@@ -2556,3 +2556,11 @@ struct CompleteImportWorkflowExecutionRequest {
 struct CompleteImportWorkflowExecutionResponse {
   10: optional WorkflowExecution execution
 }
+
+struct WorkflowExportData {
+  10: optional i32 version
+  20: optional WorkflowExecution execution
+  30: optional list<DataBlob> historyBatches
+  40: optional VersionHistory versionHistory
+  50: optional binary checksum
+}
