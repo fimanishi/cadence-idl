@@ -366,6 +366,7 @@ message ImportWorkflowExecutionRequest {
   bool force_restart = 6;
   WorkflowIdReusePolicy workflow_id_reuse_policy = 7;
   string task_list = 8;
+  google.protobuf.Duration workflow_execution_timeout = 9;
 }
 
 message ImportWorkflowExecutionResponse {

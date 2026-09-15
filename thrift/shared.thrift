@@ -2541,6 +2541,7 @@ struct ImportWorkflowExecutionRequest {
   60: optional bool forceRestart
   70: optional WorkflowIdReusePolicy workflowIdReusePolicy
   80: optional string taskList
+  90: optional i32 workflowExecutionTimeoutSeconds
 }
 
 struct ImportWorkflowExecutionResponse {
