@@ -295,6 +295,7 @@ enum WorkflowExecutionStatus {
   TERMINATED,
   CONTINUED_AS_NEW,
   TIMED_OUT,
+  PREPARING,
 }
 
 enum QueryTaskCompletedType {
