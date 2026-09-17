@@ -389,6 +389,7 @@ enum QueryConsistencyLevel {
 struct DataBlob {
   10: optional EncodingType EncodingType
   20: optional binary Data
+  30: optional binary Checksum
 }
 
 struct TaskListMetadata {
@@ -2530,6 +2531,7 @@ struct ExportWorkflowExecutionResponse {
   20: optional list<DataBlob> historyBatches
   30: optional VersionHistory versionHistory
   40: optional binary nextPageToken
+  50: optional i32 version
 }
 
 struct ImportWorkflowExecutionRequest {
@@ -2564,5 +2566,4 @@ struct WorkflowExportData {
   20: optional WorkflowExecution execution
   30: optional list<DataBlob> historyBatches
   40: optional VersionHistory versionHistory
-  50: optional binary checksum
 }

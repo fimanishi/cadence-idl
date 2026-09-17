@@ -355,6 +355,7 @@ message ExportWorkflowExecutionResponse {
   repeated DataBlob history_batches = 2;
   VersionHistory version_history = 3;
   bytes next_page_token = 4;
+  int32 version = 5;
 }
 
 message ImportWorkflowExecutionRequest {
@@ -389,5 +390,4 @@ message WorkflowExportData {
   WorkflowExecution execution = 2;
   repeated DataBlob history_batches = 3;
   VersionHistory version_history = 4;
-  bytes checksum = 5;
 }
