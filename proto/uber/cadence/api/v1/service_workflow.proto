@@ -362,12 +362,11 @@ message ImportWorkflowExecutionRequest {
   string domain = 1;
   WorkflowExecution workflow_execution = 2;
   repeated DataBlob history_batches = 3;
-  VersionHistory version_history = 4;
-  bytes page_token = 5;
-  bool force_restart = 6;
-  WorkflowIdReusePolicy workflow_id_reuse_policy = 7;
-  string task_list = 8;
-  google.protobuf.Duration workflow_execution_timeout = 9;
+  bytes page_token = 4;
+  bool force_restart = 5;
+  WorkflowIdReusePolicy workflow_id_reuse_policy = 6;
+  string task_list = 7;
+  google.protobuf.Duration workflow_execution_timeout = 8;
 }
 
 message ImportWorkflowExecutionResponse {

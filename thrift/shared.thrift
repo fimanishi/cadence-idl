@@ -2538,12 +2538,11 @@ struct ImportWorkflowExecutionRequest {
   10: optional string domain
   20: optional WorkflowExecution execution
   30: optional list<DataBlob> historyBatches
-  40: optional VersionHistory versionHistory
-  50: optional binary pageToken
-  60: optional bool forceRestart
-  70: optional WorkflowIdReusePolicy workflowIdReusePolicy
-  80: optional string taskList
-  90: optional i32 workflowExecutionTimeoutSeconds
+  40: optional binary pageToken
+  50: optional bool forceRestart
+  60: optional WorkflowIdReusePolicy workflowIdReusePolicy
+  70: optional string taskList
+  80: optional i32 workflowExecutionTimeoutSeconds
 }
 
 struct ImportWorkflowExecutionResponse {
