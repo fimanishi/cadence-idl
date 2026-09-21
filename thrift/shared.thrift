@@ -620,6 +620,7 @@ struct WorkflowExecutionStartedEventAttributes {
   160: optional string requestId
   170: optional CronOverlapPolicy cronOverlapPolicy
   180: optional ActiveClusterSelectionPolicy activeClusterSelectionPolicy
+  190: optional string importSourceRunID
 }
 
 struct ResetPoints{
