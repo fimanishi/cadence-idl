@@ -52,6 +52,7 @@ message ReplicationTask {
     SyncActivityTaskAttributes sync_activity_task_attributes = 6;
     HistoryTaskV2Attributes history_task_v2_attributes = 7;
     FailoverMarkerAttributes failover_marker_attributes = 8;
+    SyncWorkflowStateTaskAttributes sync_workflow_state_task_attributes = 9;
   }
 }
 
@@ -107,6 +108,17 @@ message FailoverMarkerToken {
   FailoverMarkerAttributes failover_marker = 2;
 }
 
+message SyncWorkflowStateTaskAttributes {
+  string domain_id = 1;
+  api.v1.WorkflowExecution workflow_execution = 2;
+  int32 workflow_state = 3;
+  int32 close_status = 4;
+  int64 version = 5;
+  VersionHistory version_history = 6;
+  google.protobuf.Timestamp last_updated_time = 7;
+  int32 workflow_timeout = 8;
+}
+
 message ReplicationTaskInfo {
   string domain_id = 1;
   api.v1.WorkflowExecution workflow_execution = 2;
@@ -127,6 +139,7 @@ enum ReplicationTaskType {
   REPLICATION_TASK_TYPE_HISTORY_METADATA = 5;
   REPLICATION_TASK_TYPE_HISTORY_V2 = 6;
   REPLICATION_TASK_TYPE_FAILOVER_MARKER = 7;
+  REPLICATION_TASK_TYPE_SYNC_WORKFLOW_STATE = 8;
 }
 
 enum DomainOperation {

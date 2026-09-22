@@ -30,6 +30,7 @@ enum ReplicationTaskType {
   HistoryMetadata
   HistoryV2
   FailoverMarker
+  SyncWorkflowState
 }
 
 enum DomainOperation {
@@ -95,6 +96,18 @@ struct FailoverMarkers{
 	10: optional list<FailoverMarkerAttributes> failoverMarkers
 }
 
+struct SyncWorkflowStateTaskAttributes {
+  10: optional string domainId
+  20: optional string workflowId
+  30: optional string runId
+  40: optional i32 workflowState
+  50: optional i32 closeStatus
+  60: optional i64 (js.type = "Long") version
+  70: optional shared.VersionHistory versionHistory
+  80: optional i64 (js.type = "Long") lastUpdatedTime
+  90: optional i32 workflowTimeout
+}
+
 struct ReplicationTask {
   10: optional ReplicationTaskType taskType
   11: optional i64 (js.type = "Long") sourceTaskId
@@ -104,6 +117,7 @@ struct ReplicationTask {
   70: optional HistoryTaskV2Attributes historyTaskV2Attributes
   80: optional FailoverMarkerAttributes failoverMarkerAttributes
   90: optional i64 (js.type = "Long") creationTime
+  100: optional SyncWorkflowStateTaskAttributes syncWorkflowStateTaskAttributes
 }
 
 struct ReplicationToken {

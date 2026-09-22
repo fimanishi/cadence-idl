@@ -344,6 +344,18 @@ struct SyncActivityRequest {
   150: optional shared.VersionHistory versionHistory
 }
 
+struct SyncWorkflowStateRequest {
+  10: optional string domainId
+  20: optional string workflowId
+  30: optional string runId
+  40: optional i32 workflowState
+  50: optional i32 closeStatus
+  60: optional i64 (js.type = "Long") version
+  70: optional shared.VersionHistory versionHistory
+  80: optional i64 (js.type = "Long") lastUpdatedTime
+  90: optional i32 workflowTimeout
+}
+
 struct QueryWorkflowRequest {
   10: optional string domainUUID
   20: optional shared.QueryWorkflowRequest request
@@ -893,6 +905,18 @@ service HistoryService {
       5: shared.ServiceBusyError serviceBusyError,
       7: shared.RetryTaskV2Error retryTaskV2Error,
     )
+
+  /**
+  * SyncWorkflowState sync the workflow state for replication
+  **/
+  void SyncWorkflowState(1: SyncWorkflowStateRequest syncWorkflowStateRequest)
+  throws (
+    1: shared.BadRequestError badRequestError,
+    2: shared.InternalServiceError internalServiceError,
+    3: shared.EntityNotExistsError entityNotExistError,
+    4: ShardOwnershipLostError shardOwnershipLostError,
+    5: shared.ServiceBusyError serviceBusyError,
+  )
 
   /**
   * DescribeMutableState returns information about the internal states of workflow mutable state.
