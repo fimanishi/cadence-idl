@@ -2561,7 +2561,6 @@ struct CompleteImportWorkflowExecutionRequest {
   10: optional string domain
   20: optional WorkflowExecution execution
   30: optional binary pageToken
-  40: optional string requestID
 }
 
 struct CompleteImportWorkflowExecutionResponse {
