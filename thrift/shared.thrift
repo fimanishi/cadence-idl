@@ -621,6 +621,8 @@ struct WorkflowExecutionStartedEventAttributes {
   170: optional CronOverlapPolicy cronOverlapPolicy
   180: optional ActiveClusterSelectionPolicy activeClusterSelectionPolicy
   190: optional string importSourceRunID
+  200: optional i64 (js.type = "Long") importTimestamp
+  210: optional i64 (js.type = "Long") importLastEventID
 }
 
 struct ResetPoints{
@@ -2544,11 +2546,15 @@ struct ImportWorkflowExecutionRequest {
   60: optional WorkflowIdReusePolicy workflowIdReusePolicy
   70: optional string taskList
   80: optional i32 workflowExecutionTimeoutSeconds
+  90: optional string sourceRunID
+  100: optional i64 (js.type = "Long") importLastEventID
+  110: optional string requestID
 }
 
 struct ImportWorkflowExecutionResponse {
   10: optional WorkflowExecution execution
   20: optional binary pageToken
+  30: optional i64 (js.type = "Long") nextEventID
 }
 
 struct CompleteImportWorkflowExecutionRequest {

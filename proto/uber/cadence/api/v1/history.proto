@@ -119,6 +119,8 @@ message WorkflowExecutionStartedEventAttributes {
   CronOverlapPolicy cron_overlap_policy = 26;
   ActiveClusterSelectionPolicy active_cluster_selection_policy = 27;
   string import_source_run_id = 28;
+  google.protobuf.Timestamp import_time = 29;
+  int64 import_last_event_id = 30;
 }
 
 message WorkflowExecutionCompletedEventAttributes {

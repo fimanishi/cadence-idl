@@ -104,8 +104,6 @@ struct SyncWorkflowStateTaskAttributes {
   50: optional i32 closeStatus
   60: optional i64 (js.type = "Long") version
   70: optional shared.VersionHistory versionHistory
-  80: optional i64 (js.type = "Long") lastUpdatedTime
-  90: optional i32 workflowTimeout
 }
 
 struct ReplicationTask {
