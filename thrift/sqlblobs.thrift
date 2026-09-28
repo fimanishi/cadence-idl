@@ -152,7 +152,7 @@ struct WorkflowExecutionInfo {
   137: optional binary activeClusterSelectionPolicy
   138: optional string activeClusterSelectionPolicyEncoding
   140: optional string importSourceRunID
-  142: optional i64 importTimestampNanos
+  142: optional i64 (js.type = "Long") importTimestampNanos
 }
 
 struct ActivityInfo {
