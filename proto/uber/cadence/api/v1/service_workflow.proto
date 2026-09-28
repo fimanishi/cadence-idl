@@ -382,6 +382,7 @@ message CompleteImportWorkflowExecutionRequest {
   string domain = 1;
   WorkflowExecution workflow_execution = 2;
   bytes page_token = 3;
+  string request_id = 4;
 }
 
 message CompleteImportWorkflowExecutionResponse {
