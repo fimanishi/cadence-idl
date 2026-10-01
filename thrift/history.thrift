@@ -99,6 +99,7 @@ struct GetMutableStateResponse {
   210: optional string parentWorkflowId
   220: optional string parentRunId
   230: optional i64 (js.type = "Long") parentInitiatedId
+  240: optional string firstExecutionRunId
 }
 
 struct PollMutableStateRequest {
@@ -298,6 +299,7 @@ struct RecordChildExecutionCompletedRequest {
   40: optional shared.WorkflowExecution completedExecution
   50: optional shared.HistoryEvent completionEvent
   60: optional i64 (js.type = "Long") startedId
+  70: optional string firstExecutionRunId
 }
 
 struct ReplicateEventsV2Request {
