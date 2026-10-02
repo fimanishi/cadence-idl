@@ -175,9 +175,26 @@ struct RespondActivityTaskCanceledRequest {
   20: optional shared.RespondActivityTaskCanceledRequest cancelRequest
 }
 
+enum RefreshWorkflowTasksScopeType {
+  PARENT_COMPLETION,
+}
+
+// ParentCompletionScopeAttributes refreshes only the task that reports the completion
+// of a closed child to the initiated event of its parent with the given ID
+struct ParentCompletionScopeAttributes {
+  10: optional i64 (js.type = "Long") initiatedId
+}
+
+// RefreshWorkflowTasksScope limits the tasks that are refreshed. Unset means all tasks.
+struct RefreshWorkflowTasksScope {
+  10: optional RefreshWorkflowTasksScopeType scopeType
+  20: optional ParentCompletionScopeAttributes parentCompletionScopeAttributes
+}
+
 struct RefreshWorkflowTasksRequest {
   10: optional string domainUIID
   20: optional shared.RefreshWorkflowTasksRequest request
+  30: optional RefreshWorkflowTasksScope scope
 }
 
 struct RecordActivityTaskStartedRequest {
@@ -300,6 +317,7 @@ struct RecordChildExecutionCompletedRequest {
   50: optional shared.HistoryEvent completionEvent
   60: optional i64 (js.type = "Long") startedId
   70: optional string firstExecutionRunId
+  80: optional bool isParentRequested
 }
 
 struct ReplicateEventsV2Request {
