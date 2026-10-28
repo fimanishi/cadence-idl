@@ -321,6 +321,8 @@ struct RecordChildExecutionCompletedRequest {
   // version of the started event of the completed child, set only when the parent is in the same domain, so the parent
   // can drop a completion from an initiated event that can not be on its current branch
   80: optional i64 (js.type = "Long") childStartVersion
+  // true when the parent requested this completion with the PARENT_REQUESTED_COMPLETION refresh scope
+  90: optional bool isParentRequested
 }
 
 struct ReplicateEventsV2Request {
