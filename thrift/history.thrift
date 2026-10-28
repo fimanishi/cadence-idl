@@ -23,6 +23,10 @@ include "replicator.thrift"
 
 namespace java com.uber.cadence.history
 
+enum RefreshWorkflowTasksScopeType {
+  PARENT_REQUESTED_COMPLETION,
+}
+
 exception EventAlreadyStartedError {
   1: required string message
 } (rpc.code = "ALREADY_EXISTS")
@@ -173,9 +177,24 @@ struct RespondActivityTaskCanceledRequest {
   20: optional shared.RespondActivityTaskCanceledRequest cancelRequest
 }
 
+// ParentRequestedCompletionScopeAttributes creates only the task that sends the completion of a closed child workflow
+// to the initiated event of its parent with this ID
+struct ParentRequestedCompletionScopeAttributes {
+  10: optional i64 (js.type = "Long") initiatedId
+}
+
+// RefreshWorkflowTasksScope is one group of tasks to refresh. Add a new type and its attributes for a new group.
+struct RefreshWorkflowTasksScope {
+  10: optional RefreshWorkflowTasksScopeType scopeType
+  20: optional ParentRequestedCompletionScopeAttributes parentRequestedCompletionScopeAttributes
+}
+
 struct RefreshWorkflowTasksRequest {
   10: optional string domainUIID
   20: optional shared.RefreshWorkflowTasksRequest request
+  // scopes limits the refresh to these groups of tasks. When it is empty, all tasks are refreshed. A scope with an
+  // unknown type is rejected.
+  30: optional list<RefreshWorkflowTasksScope> scopes
 }
 
 struct RecordActivityTaskStartedRequest {
